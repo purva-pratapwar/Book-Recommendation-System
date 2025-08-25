@@ -1,31 +1,95 @@
-# Book Recommendation Engine using KNN
-In this challenge, you will create a book recommendation algorithm using K-Nearest Neighbors.
+📚 Book Recommendation System Using K-Nearest Neighbors
 
-You will use the Book-Crossings dataset. This dataset contains 1.1 million ratings (scale of 1-10) of 270,000 books by 90,000 users.
+This project implements a book recommendation system using the K-Nearest Neighbors (KNN) algorithm. The system recommends books similar to a given book based on user ratings.
 
-After importing and cleaning the data, use NearestNeighbors from sklearn.neighbors to develop a model that shows books that are similar to a given book. The Nearest Neighbors algorithm measures the distance to determine the “closeness” of instances.
+The dataset used is the Book-Crossings dataset, which contains:
 
-Create a function named get_recommends that takes a book title (from the dataset) as an argument and returns a list of 5 similar books with their distances from the book argument.
+Over 1.1 million ratings on a scale of 1–10
 
-This code:
+270,000 books
 
-> get_recommends("The Queen of the Damned (Vampire Chronicles (Paperback))")
+90,000 users
 
-should return:
+Project Overview
 
-> [
-> &nbsp;&nbsp;&nbsp;&nbsp;  'The Queen of the Damned (Vampire Chronicles (Paperback))', \
-> &nbsp;&nbsp;&nbsp;&nbsp;  [ \
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ['Catch 22', 0.793983519077301],  \
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ['The Witching Hour (Lives of the Mayfair Witches)', 0.7448656558990479],  \
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ['Interview with the Vampire', 0.7345068454742432], \
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ['The Tale of the Body Thief (Vampire Chronicles (Paperback))', 0.5376338362693787], \
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ['The Vampire Lestat (Vampire Chronicles, Book II)', 0.5178412199020386] \
-> &nbsp;&nbsp;&nbsp;&nbsp;  ] \
-> ]
+The main goal is to suggest books that are most similar to a target book based on user preferences. We achieve this using the KNN algorithm, which calculates distances between books in the rating space.
 
-Notice that the data returned from get_recommends() is a list. The first element in the list is the book title passed into the function. The second element in the list is a list of five more lists. Each of the five lists contains a recommended book and the distance from the recommended book to the book passed into the function.
+To ensure meaningful recommendations, we filter the data to include:
 
-If you graph the dataset (optional), you will notice that most books are not rated frequently. To ensure statistical significance, remove from the dataset users with less than 200 ratings and books with less than 100 ratings.
+Users with at least 200 ratings
 
-The first three cells import libraries you may need and the data to use. The final cell is for testing. Write all your code in between those cells.
+Books with at least 100 ratings
+
+This removes sparsely rated books and inactive users, improving recommendation quality.
+
+Features
+
+Filter dataset for statistically significant ratings
+
+KNN-based similarity search
+
+Interactive recommendation function: get_recommends(book_title)
+
+Returns a list of 5 recommended books with distances
+
+Installation
+
+Clone the repository:
+
+git clone https://github.com/yourusername/book-recommender.git
+cd book-recommender
+
+
+Install required Python packages:
+
+pip install -r requirements.txt
+
+
+Dependencies include: pandas, numpy, scikit-learn
+
+Download the Book-Crossings dataset and place the CSV in the project directory.
+
+Usage
+from recommender import get_recommends
+
+# Example usage
+recommendations = get_recommends("The Queen of the Damned (Vampire Chronicles (Paperback))")
+print(recommendations)
+
+
+Example Output:
+
+[
+    'The Queen of the Damned (Vampire Chronicles (Paperback))',
+    [
+        ['Catch 22', 0.793983519077301],
+        ['The Witching Hour (Lives of the Mayfair Witches)', 0.7448656558990479],
+        ['Interview with the Vampire', 0.7345068454742432],
+        ['The Tale of the Body Thief (Vampire Chronicles (Paperback))', 0.5376338362693787],
+        ['The Vampire Lestat (Vampire Chronicles, Book II)', 0.5178412199020386]
+    ]
+]
+
+
+The first element is the input book.
+
+The second element is a list of recommended books and their similarity distances.
+
+How It Works
+
+Data Cleaning: Remove inactive users and rarely rated books.
+
+Create Book-User Matrix: Rows = books, Columns = users, Values = ratings.
+
+Train KNN Model: Using sklearn.neighbors.NearestNeighbors.
+
+Get Recommendations:
+
+For a given book, find nearest neighbors in rating space.
+
+Return top 5 similar books with distances.
+
+
+Push to branch (git push origin feature-name)
+
+Open a Pull Request
